@@ -1,0 +1,2 @@
+[server]
+maxUploadSize = 0  # Set to 0 to remove the limit

@@ -27,4 +27,4 @@ uploaded_files/
 # Exclude Streamlit and HTML template dirs
 templates/
 static/
-.streamlit/
+
