@@ -1,0 +1,30 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs and temporary files
+*.log
+*.tmp
+
+# OS/system files
+.DS_Store
+Thumbs.db
+
+# Data folders (exclude big or sensitive data)
+Batches/
+big_batch_1/
+correct/
+incorrect/
+output_texts/
+to_delete/
+uploaded_files/
+
+# Exclude Streamlit and HTML template dirs
+templates/
+static/
+.streamlit/
