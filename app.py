@@ -76,7 +76,7 @@ def main():
             st.sidebar.error(f"Error creating folders: {e}")
             return
 
-    # 4. Store uploaded files in session_state
+    # Initialize session state for persistence
     if "images" not in st.session_state:
         st.session_state.images = []
     if "labels" not in st.session_state:
@@ -103,17 +103,28 @@ def main():
             st.error("Please upload images and/or labels.")
             return
 
+        progress_bar = st.progress(0)  # Initialize progress bar
+        total_files = len(uploaded_images or []) + len(uploaded_labels or [])
+        processed_files = 0
+
         if uploaded_images:
             for img in uploaded_images:
                 if img.name not in [i.name for i in st.session_state.images]:
                     st.session_state.images.append(img)
                     st.session_state.image_bytes[img.name] = img.getvalue()
+                processed_files += 1
+                progress_bar.progress(processed_files / total_files)
+
         if uploaded_labels:
             for label in uploaded_labels:
                 label_name = os.path.splitext(label.name)[0]
                 if label_name not in st.session_state.labels:
                     st.session_state.labels[label_name] = label
                     st.session_state.label_bytes[label.name] = label.getvalue()
+                processed_files += 1
+                progress_bar.progress(processed_files / total_files)
+
+        progress_bar.empty()  # Remove the progress bar after processing
         st.success(f"Loaded {len(uploaded_images or [])} new images and {len(uploaded_labels or [])} new labels.")
 
     if not st.session_state.images:
