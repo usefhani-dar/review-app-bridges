@@ -1,4 +1,11 @@
 import os
+
+# Disable proxy by clearing the environment variables
+os.environ["HTTP_PROXY"] = ""
+os.environ["HTTPS_PROXY"] = ""
+os.environ["http_proxy"] = ""
+os.environ["https_proxy"] = ""
+
 import io
 import streamlit as st
 from PIL import Image, ImageDraw
